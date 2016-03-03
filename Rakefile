@@ -17,10 +17,11 @@ Jeweler::Tasks.new do |gem|
   gem.name = "sorry-tangerine"
   gem.homepage = "http://github.com/zgs225/sorry-tangerine"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{抓取IT桔子数据}
+  gem.description = %Q{抓取IT桔子数据}
   gem.email = "zgs225@gmail.com"
   gem.authors = ["zgs225"]
+  gem.executables = ['sorry-tangerine']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

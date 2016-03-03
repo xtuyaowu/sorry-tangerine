@@ -1,4 +1,4 @@
-require 'anemone'
+require 'spidr'
 require 'sorry-tangerine/parser'
 
 module SorryTangerine
@@ -10,11 +10,20 @@ module SorryTangerine
 
   class Core
     def rob
-      Anemone.crawl("http://www.itjuzi.com/") do |anemone|
-        anemone.on_pages_like(/company\/(\d+)$/) do |page|
-          company = new SorryTangerine::Parser(page).parse
+      Spidr.user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
+      Spidr.robots    = false
 
-          puts company
+      Spidr.host("www.itjuzi.com") do |spidr|
+        spidr.every_url_like(/^http:\/\/.+company\/\d+$/) do |url|
+          page = spidr.get_page url
+
+          if url.scheme == 'http' && url.path.match(/company\/\d+/)
+            parser = SorryTangerine::Parser.new page
+
+            parser.parse
+          else
+            puts "跳过#{page.url}: #{page.title}"
+          end
         end
       end
     end

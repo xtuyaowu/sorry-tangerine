@@ -1,7 +1,7 @@
 # source "http://rubygems.org"
 source "https://ruby.taobao.org"
 
-gem "anemone"
+gem "spidr"
 
 group :development do
   gem "rspec", "~> 2.8.0"

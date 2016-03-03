@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'sorry-tangerine'
+
+start = Time.now
+
+puts "================================================================================"
+puts "[#{start}] 开始抓取数据"
+
+SorryTangerine.rob
+
+finish = Time.now
+puts "[#{finish}] 抓取结束"
+puts "================================================================================"
