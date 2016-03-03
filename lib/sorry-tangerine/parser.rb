@@ -20,7 +20,7 @@ module SorryTangerine
       @data[:company][:status]   = get_text_at('span.title b').match(/\((.*)\)/)[1]
       @data[:company][:scope]    = get_array_at '.info-line .scope a'
       @data[:company][:location] = get_array_at '.info-line .loca a'
-      @data[:company][:tags]     = get_array_at '.rowfoot .tagset a tag'
+      @data[:company][:tags]     = get_array_at '.rowfoot .tagset a .tag'
       @data[:company][:desc]     = get_text_at '.block-inc-info .block .des'
       @data[:company][:name]     = get_array_at('.block .des-more div span').first.gsub('公司全称：', '')
       @data[:company][:created_at] = get_array_at('.block .des-more div span')[1].gsub('成立时间：', '')
