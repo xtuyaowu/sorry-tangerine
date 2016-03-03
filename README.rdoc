@@ -1,6 +1,6 @@
-= sorry-tangerine
+= Sorry Tangerine
 
-Description goes here.
+抓取IT橘子的公司数据
 
 == Contributing to sorry-tangerine
  
@@ -17,3 +17,7 @@ Description goes here.
 Copyright (c) 2016 zgs225. See LICENSE.txt for
 further details.
 
+== TODO
+
+* 抓取更更多的数据（登录后抓取）
+* 加快运行速度（多进程）
