@@ -2,14 +2,14 @@ require 'json'
 
 module SorryTangerine
   class Parser
+    attr_reader :data
+
     def initialize(page)
       @page = page
       @data = {}
     end
 
     def parse
-      puts "\n[#{Time.now}] 正在解析：#{@page.url}\n"
-
       @data[:id]    = @page.url.to_s.match(/company\/(\d+)/)[1]
       @data[:title] = @page.title
       @data[:url]   = @page.url.to_s
@@ -25,10 +25,6 @@ module SorryTangerine
       @data[:company][:name]     = get_array_at('.block .des-more div span').first.gsub('公司全称：', '')
       @data[:company][:created_at] = get_array_at('.block .des-more div span')[1].gsub('成立时间：', '')
       @data[:company][:operation] = get_array_at('.block .des-more div span')[2]
-
-      puts @data
-
-      puts "\n[#{Time.now}] 解析结束：#{@page.url}\n"
     rescue NoMethodError
     end
 
