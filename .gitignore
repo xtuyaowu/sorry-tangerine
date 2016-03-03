@@ -49,3 +49,4 @@ pkg
 #*.rbc
 
 data/*.json
+.byebug_history

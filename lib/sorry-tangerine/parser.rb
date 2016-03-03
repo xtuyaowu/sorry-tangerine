@@ -16,7 +16,7 @@ module SorryTangerine
 
       @data[:company] = {}
 
-      @data[:company][:title]    = get_text_at('span.title b').gsub(/\/.*/, '')
+      @data[:company][:title]    = @page.title.gsub(/\s+\|.*/, '')
       @data[:company][:status]   = get_text_at('span.title b').match(/\((.*)\)/)[1]
       @data[:company][:scope]    = get_array_at '.info-line .scope a'
       @data[:company][:location] = get_array_at '.info-line .loca a'
