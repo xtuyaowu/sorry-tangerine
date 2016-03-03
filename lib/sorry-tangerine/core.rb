@@ -16,14 +16,9 @@ module SorryTangerine
       Spidr.host("www.itjuzi.com") do |spidr|
         spidr.every_url_like(/^http:\/\/.+company\/\d+$/) do |url|
           page = spidr.get_page url
-
-          if url.scheme == 'http' && url.path.match(/company\/\d+/)
-            parser = SorryTangerine::Parser.new page
-
-            parser.parse
-          else
-            puts "跳过#{page.url}: #{page.title}"
-          end
+          parser = SorryTangerine::Parser.new page
+          parser.parse
+          parser.store_as_json
         end
       end
     end

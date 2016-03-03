@@ -1,3 +1,5 @@
+require 'json'
+
 module SorryTangerine
   class Parser
     def initialize(page)
@@ -8,6 +10,7 @@ module SorryTangerine
     def parse
       puts "\n[#{Time.now}] 正在解析：#{@page.url}\n"
 
+      @data[:id]    = @page.url.to_s.match(/company\/(\d+)/)[1]
       @data[:title] = @page.title
       @data[:url]   = @page.url.to_s
 
@@ -27,6 +30,16 @@ module SorryTangerine
 
       puts "\n[#{Time.now}] 解析结束：#{@page.url}\n"
     rescue NoMethodError
+    end
+
+    def id
+      @data[:id]
+    end
+
+    def store_as_json(dir = './data')
+      json_str = @data.to_json
+      file     = File.expand_path "#{id()}.json", dir
+      File.open(file, 'w') { |f| f.write(json_str) }
     end
 
     protected
