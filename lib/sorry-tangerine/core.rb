@@ -1,4 +1,5 @@
 require 'spidr'
+require 'user_agent_randomizer'
 require 'sorry-tangerine/parser'
 
 module SorryTangerine
@@ -10,14 +11,24 @@ module SorryTangerine
 
   class Core
     def rob
-      Spidr.user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36';
-      Spidr.robots    = false
+      Spidr.user_agent = UserAgentRandomizer::UserAgent.fetch(type: "desktop_browser").string
+      Spidr.robots     = false
 
-      Spidr.host("www.itjuzi.com") do |spidr|
-        spidr.every_url_like(/^http:\/\/.+company\/\d+$/) do |url|
+      Spidr.start_at("http://www.itjuzi.com/company") do |spidr|
+        pattern = /^http:\/\/.+company\/\d+$/
+
+        spidr.every_url do |url|
+          puts "\n[#{Time.now}] 正在解析：#{url}\n"
+
+          unless url.to_s =~ pattern
+            puts "[#{Time.now}] 跳过解析：#{url}\n"
+          end
+
+          sleep 1
+        end
+
+        spidr.every_url_like(pattern) do |url|
           page = spidr.get_page url
-
-          puts "\n[#{Time.now}] 正在解析：#{page.url}\n\n"
 
           parser = SorryTangerine::Parser.new page
           parser.parse

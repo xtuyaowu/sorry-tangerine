@@ -2,6 +2,7 @@
 source "https://ruby.taobao.org"
 
 gem "spidr"
+gem 'user-agent-randomizer', '~> 0.2.0'
 
 group :development do
   gem "rspec", "~> 2.8.0"
