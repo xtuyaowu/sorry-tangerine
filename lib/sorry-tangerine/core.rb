@@ -34,6 +34,7 @@ module SorryTangerine
           parser.parse
           parser.store_as_json
 
+          puts "\n"
           puts parser.data
           puts "\n[#{Time.now}] 解析结束：#{page.url}\n"
         end
